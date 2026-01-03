@@ -1,0 +1,18 @@
+{
+    "categories": [
+        {
+            "name": "Fruit",
+            "items": [
+                "Apple",
+                "Banana"
+            ]
+        },
+        {
+            "name": "Vegetables",
+            "items": [
+                "Carrot",
+                "Potato"
+            ]
+        }
+    ]
+}

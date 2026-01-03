@@ -1,0 +1,12 @@
+
+/**
+ * @config {
+ *   "input": "menu.json",
+ *   "output": "output/menu.subset.json",
+ *   "examples": "menu-subset.example.json"
+ * }
+ */
+categories {
+  name: items
+}
+            

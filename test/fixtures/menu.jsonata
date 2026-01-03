@@ -1,0 +1,11 @@
+/**
+ * @config {
+ *   "input": "menu.json",
+ *   "output": "output/menu.transformed.json",
+ *   "schema": "menu.schema.json",
+ *   "examples": "menu.example.json"
+ * }
+ */
+categories {
+  name: items
+}
