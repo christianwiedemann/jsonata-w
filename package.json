@@ -1,18 +1,22 @@
 {
-  "name": "jsonata-ai",
+  "name": "jsonata-w",
   "version": "1.0.0",
   "description": "Tool to assist AI in transforming JSON files",
   "main": "dist/index.js",
   "bin": {
-    "jsonata-ai": "dist/cli.js"
+    "jsonata-w": "dist/cli.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "cli": "node dist/cli.js $*",
     "test": "jest",
     "lint": "eslint src test",
     "lint:fix": "eslint src test --fix",
-    "check": "npm run lint && tsc --noEmit"
+    "check": "npm run lint && tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "author": "",
   "license": "ISC",

@@ -1,6 +1,6 @@
-# JSONata AI Tool
+# JSONata Workflow (jsonata-w)
 
-A command-line utility to assist AI agents in transforming and inspecting JSON files.
+The **w** stands for **Workflow**. A command-line utility optimized to assist AI agents in transforming and inspecting JSON files, but equally powerful for manual workflows.
 
 ## Commands
 
@@ -8,7 +8,7 @@ A command-line utility to assist AI agents in transforming and inspecting JSON f
 Inspects the structure of a JSON file.
 
 ```bash
-jsonata-ai inspect <file> [options]
+jsonata-w inspect <file> [options]
 ```
 
 #### Options
@@ -21,19 +21,19 @@ jsonata-ai inspect <file> [options]
 #### Examples
 **Summary view:**
 ```bash
-jsonata-ai inspect data.json --summary
+jsonata-w inspect data.json --summary
 ```
 
 **Filter with JSONPath:**
 ```bash
-jsonata-ai inspect data.json --jsonpath "$.users[*].name"
+jsonata-w inspect data.json --jsonpath "$.users[*].name"
 ```
 
 ### Transform
 Transforms a JSON file using a JSONata expression file. The input and output paths are defined directly within the JSONata file using a standard configuration block.
 
 ```bash
-jsonata-ai transform <file>
+jsonata-w transform <file>
 ```
 
 #### Configuration Block
