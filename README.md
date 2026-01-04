@@ -40,11 +40,14 @@ jsonata-w transform <file>
 The JSONata file MUST start with a configuration comment block:
 
 ```javascript
-/* @config {
-  "input": "./path/to/input.json",
-  "output": "./path/to/output.json",
-  "schema": "./optional/schema.json"
-} */
+/**
+ * @config {
+ *   "input": "./path/to/input.json",
+ *   "output": "./path/to/output.json",
+ *   "schema": "./optional/schema.json",
+ *   "examples": "./path/to/example.json"
+ * }
+ */
 
 (
   /* Your JSONata expression here */
@@ -55,6 +58,7 @@ The JSONata file MUST start with a configuration comment block:
 - `input`: Path to the source JSON file (relative to the .jsonata file).
 - `output`: Path where the transformed JSON will be saved (relative to the .jsonata file).
 - `schema`: (Optional) Path to a JSON schema for validation.
+- `examples`: (Optional) Path to a JSON/YAML file containing the expected output subset for validation.
 
 #### Features
 - **Embedded Config**: No need for CLI arguments for input/output.
