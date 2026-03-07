@@ -1,0 +1,11 @@
+color:
+  primary:
+    $value: "#4F46E5"
+    $type: color
+  secondary:
+    $value: "#0D9488"
+    $type: color
+typography:
+  heading:
+    $value: Space Grotesk
+    $type: fontFamily

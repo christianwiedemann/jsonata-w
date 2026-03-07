@@ -1,0 +1,11 @@
+/** @config
+ {
+   "input": "menu.yml",
+   "output": "output/menu-yaml.transformed.json",
+   "schema": "menu.schema.yml",
+   "examples": "menu.example.yml"
+ }
+ */
+categories {
+  name: items
+}

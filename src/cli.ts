@@ -56,9 +56,9 @@ function pickSubset(data: any, template: any): any {
 }
 
 yargs(hideBin(process.argv))
-    .command('inspect <file>', 'Inspect JSON structure', (yargs) => {
+    .command('inspect <file>', 'Inspect JSON/YAML structure', (yargs) => {
         return yargs
-            .positional('file', { describe: 'JSON file to inspect', type: 'string', demandOption: true })
+            .positional('file', { describe: 'JSON/YAML file to inspect', type: 'string', demandOption: true })
             .option('depth', { alias: 'd', type: 'number', default: 1, describe: 'Depth to inspect' })
             .option('summary', { alias: 's', type: 'boolean', default: false, describe: 'Show structure summary' })
             .option('schema', { type: 'boolean', default: false, describe: 'Generate JSON schema from file' })
@@ -101,7 +101,7 @@ yargs(hideBin(process.argv))
             process.exit(1);
         }
     })
-    .command('transform <file>', 'Transform JSON using a single JSONata file with embedded @config', (yargs) => {
+    .command('transform <file>', 'Transform JSON/YAML using a single JSONata file with embedded @config', (yargs) => {
         return yargs
             .positional('file', { describe: 'JSONata file with embedded @config', type: 'string', demandOption: true });
     }, async (argv) => {
@@ -196,7 +196,13 @@ yargs(hideBin(process.argv))
             const dir = path.dirname(outputPath);
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
-            fs.writeFileSync(outputPath, JSON.stringify(finalResult, null, 2));
+            const isYamlOutput = outputPath.endsWith('.yml') || outputPath.endsWith('.yaml');
+            const outputContent = (typeof finalResult === 'string')
+                ? finalResult
+                : isYamlOutput
+                    ? yaml.dump(finalResult, { indent: 2, lineWidth: -1 })
+                    : JSON.stringify(finalResult, null, 2);
+            fs.writeFileSync(outputPath, outputContent);
             console.log(`Transformed ${config.input} -> ${config.output}`);
         } catch (e: any) {
             console.error(e.message);

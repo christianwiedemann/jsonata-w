@@ -28,6 +28,19 @@ describe('CLI Integration', () => {
             expect(schema).toHaveProperty('type', 'object');
             expect(schema).toHaveProperty('properties');
         });
+
+        it('should inspect YAML files', () => {
+            const yamlFixture = path.resolve(__dirname, 'fixtures/menu.yml');
+            const output = execSync(`node ${CLI_PATH} inspect --summary ${yamlFixture}`).toString();
+            expect(output).toContain('categories');
+        });
+
+        it('should inspect YAML tokens file', () => {
+            const yamlFixture = path.resolve(__dirname, 'fixtures/tokens.yml');
+            const output = execSync(`node ${CLI_PATH} inspect --summary ${yamlFixture}`).toString();
+            expect(output).toContain('color');
+            expect(output).toContain('typography');
+        });
     });
 
     describe('transform', () => {
@@ -82,6 +95,18 @@ categories {
 
             const output = execSync(`node ${CLI_PATH} transform ${SUBSET_JSONATA}`).toString();
             expect(output).toContain('Example validation passed');
+        });
+
+        it('should transform YAML input with YAML schema and YAML example validation', () => {
+            const YAML_JSONATA = path.resolve(__dirname, 'fixtures/menu-yaml.jsonata');
+            const output = execSync(`node ${CLI_PATH} transform ${YAML_JSONATA}`).toString();
+            expect(output).toContain('Validation passed');
+            expect(output).toContain('Example validation passed');
+            expect(output).toContain('Transformed menu.yml -> output/menu-yaml.transformed.json');
+
+            const transformed = JSON.parse(fs.readFileSync(path.resolve(OUTPUT_DIR, 'menu-yaml.transformed.json'), 'utf-8'));
+            expect(transformed).toHaveProperty('Fruit');
+            expect(transformed.Fruit).toContain('Apple');
         });
     });
 });

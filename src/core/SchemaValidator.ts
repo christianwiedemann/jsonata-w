@@ -1,5 +1,6 @@
 import Ajv from 'ajv';
 import fs from 'fs';
+import yaml from 'js-yaml';
 
 export class SchemaValidator {
     private ajv: Ajv;
@@ -15,9 +16,11 @@ export class SchemaValidator {
         const schemaContent = fs.readFileSync(schemaPath, 'utf-8');
         let schema;
         try {
-            schema = JSON.parse(schemaContent);
+            const isYaml = schemaPath.endsWith('.yml') || schemaPath.endsWith('.yaml');
+            schema = isYaml ? yaml.load(schemaContent) : JSON.parse(schemaContent);
         } catch (_e) {
-            throw new Error(`Invalid JSON schema in file: ${schemaPath}`);
+            const format = (schemaPath.endsWith('.yml') || schemaPath.endsWith('.yaml')) ? 'YAML' : 'JSON';
+            throw new Error(`Invalid ${format} schema in file: ${schemaPath}`);
         }
 
         const validate = this.ajv.compile(schema);
